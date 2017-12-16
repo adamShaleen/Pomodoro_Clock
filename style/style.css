@@ -1,1 +1,53 @@
+@import url("https://fontlibrary.org/face/segment7");
 
+body {
+    margin: auto;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+}
+
+#title {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+.cursor {
+    cursor: pointer;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.control-row > div {
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+.control-button-display {
+    display: flex;
+    justify-content: space-around;
+}
+
+.timer {
+    margin: auto;
+}
+
+#timer-display {
+    margin: auto;
+    width: 250px;
+    height: 100px;
+    font-size: 80px;
+    font-family: "Segment7Standard";
+}
+
+.timer-button-row {
+    display: flex;
+    justify-content: center;
+}
+
+.timer-button-row > div {
+    margin-left: 1em;
+    margin-right: 1em;
+}

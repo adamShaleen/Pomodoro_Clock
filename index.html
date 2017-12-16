@@ -7,21 +7,34 @@
     </head>
     <body>
 
-        <h1 id="title">Pomodoro Clock</h1>
+        <p id="title">Pomodoro Clock</p>
 
-        <div class="controls">
-            <div class="control-title">Break Length</div>
-            <div class="break-controls">
-                <div id="break-" class="-">-</div>
-                <div id="break-control-length" class="control-length">5 min</div>
-                <div id="break+" class="+">+</div>
+        <div class="control-row">
+
+            <div class="control-left">
+                <p>Break Length</p>
+                <div class="control-button-display">
+                    <div id="break-" class="cursor">-</div>
+                    <div id="break-display">5 min</div>
+                    <div id="break+" class="cursor">+</div>
+                </div>
             </div>
 
-            <div class="control-title">Session Length</div>
-            <div class="session-controls">
-                <div id="session-" class="-">-</div>
-                <div id="session-control-length" class="control-length">25 min</div>
-                <div id="session+" class="+">+</div>
+            <div class="control-right">
+                <p>Session Length</p>
+                <div class="control-button-display">
+                    <div id="session-" class="cursor">-</div>
+                    <div id="session-display">25 min</div>
+                    <div id="session+" class="cursor">+</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timer">
+            <div id="timer-display">25:00</div>
+            <div class="timer-button-row">
+                <div id="timer-stop-button" class="cursor">STOP</div>
+                <div id="timer-start-button" class="cursor">START</div>
             </div>
         </div>
 
