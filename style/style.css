@@ -32,6 +32,7 @@ body {
 
 .timer {
     margin: auto;
+    margin-bottom: 25px;
 }
 
 #timer-display {
@@ -50,4 +51,15 @@ body {
 .timer-button-row > div {
     margin-left: 1em;
     margin-right: 1em;
+}
+
+.origin {
+    position:absolute;
+    bottom:10px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
