@@ -35,7 +35,7 @@ body {
     margin-bottom: 25px;
 }
 
-#timer-display {
+.timer-display {
     margin: auto;
     width: 250px;
     height: 100px;
