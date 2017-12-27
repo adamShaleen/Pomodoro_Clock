@@ -56,4 +56,30 @@ $(document).ready(function() {
         $("#session-timer").show();
     });
     //======================================================
+
+    //Timer countdown=======================================
+    $("#session-timer-start-button").click(function() {
+        countdown();
+    });
+
+    $("#break-timer-start-button").click(function() {
+        countdown();
+    })
+
+    function countdown() {
+
+        var sessionVisible = $("#session-timer").is(":visible");
+        var seconds = 0;
+        var minutes = sessionVisible ? sessionTime : breakTime;
+
+        setInterval(function() {
+            if (seconds === 0) {
+                seconds = 59;
+                minutes--;
+            }
+            seconds--;
+            sessionVisible ? $("#session-timer-display").html(minutes + ":" + seconds) : $("#break-timer-display").html(minutes + ":" + seconds);
+        }, 1000);
+    }
+
 });
