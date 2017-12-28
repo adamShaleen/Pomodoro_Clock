@@ -5,6 +5,9 @@ $(document).ready(function() {
 
     var breakTime = 5;
     var sessionTime = 25;
+    var seconds = 0;
+    var minutes;
+    var countdownInterval;
 
     $("#breakDisplay").html(breakTime);
     $("#sessionDisplay").html(sessionTime);
@@ -13,7 +16,7 @@ $(document).ready(function() {
 
     // Add/Subtract Controls===============================
     $("#breakSubtract").click(function() {
-        if (breakTime !== 0) {
+        if (breakTime !== 1) {
             breakTime--;
             $("#breakDisplay").html(breakTime);
             $("#break-timer-display").html(breakTime + ":00");
@@ -62,23 +65,45 @@ $(document).ready(function() {
         countdown();
     });
 
+    $("#session-timer-stop-button").click(function() {
+        clearInterval(countdownInterval);
+        sessionTime = minutes;
+    });
+
     $("#break-timer-start-button").click(function() {
         countdown();
-    })
+    });
+
+    $("#break-timer-stop-button").click(function() {
+        clearInterval(countdownInterval);
+        breakTime = minutes;
+    });
 
     function countdown() {
 
         var sessionVisible = $("#session-timer").is(":visible");
-        var seconds = 0;
-        var minutes = sessionVisible ? sessionTime : breakTime;
+        minutes = sessionVisible ? sessionTime : breakTime;
 
-        setInterval(function() {
-            if (seconds === 0) {
-                seconds = 59;
+        countdownInterval = setInterval(function() {
+
+            if (seconds === 0 && minutes === 0) {
+                clearInterval(countdownInterval);
+                sessionVisible ? $("#session-timer-display").html("END") : $("#break-timer-display").html("END");
+                return;
+            }
+
+            if (seconds === 0 && minutes !== 0) {
+                seconds = 60;
                 minutes--;
             }
+
+            if (seconds === 0 && minutes === 1) {
+                minutes = 0;
+            }
+
             seconds--;
-            sessionVisible ? $("#session-timer-display").html(minutes + ":" + seconds) : $("#break-timer-display").html(minutes + ":" + seconds);
+            sessionVisible ? $("#session-timer-display").html(minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)) : $("#break-timer-display").html(minutes + ":" + (seconds < 10 ? "0" + seconds : seconds));
+
         }, 1000);
     }
 
