@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     // Defaults===========================================
-    $("#breakTimer").hide();
+    $("#breakTimerContainer").hide();
 
     var breakTime = 5;
     var sessionTime = 25;
@@ -49,14 +49,14 @@ $(document).ready(function() {
     //======================================================
 
     // Toggle Timer Mode====================================
-    $("#sessionSwitch").click(function() {
-        $("#sessionTimer").hide();
-        $("#breakTimer").show();
+    $("#switchToBreakButton").click(function() {
+        $("#sessionTimerContainer").hide();
+        $("#breakTimerContainer").show();
     });
 
-    $("#breakSwitch").click(function() {
-        $("#breakTimer").hide();
-        $("#sessionTimer").show();
+    $("#switchToSessionButton").click(function() {
+        $("#breakTimerContainer").hide();
+        $("#sessionTimerContainer").show();
     });
     //======================================================
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
 
     function countdown() {
 
-        var sessionVisible = $("#sessionTimer").is(":visible");
+        var sessionVisible = $("#sessionTimerContainer").is(":visible");
         minutes = sessionVisible ? sessionTime : breakTime;
 
         countdownInterval = setInterval(function() {
