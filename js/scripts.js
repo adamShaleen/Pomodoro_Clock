@@ -78,6 +78,7 @@ $(document).ready(function() {
             if (timeStamp.end) {
                 clearInterval(sessionInterval);
                 alarm.play();
+                $("#tomatoTimer").removeClass('spin');
                 return;
             }
 
@@ -109,6 +110,7 @@ $(document).ready(function() {
             if (timeStamp.end) {
                 clearInterval(breakInterval);
                 alarm.play();
+                $("#tomatoTimer").removeClass('spin');
                 return;
             }
 
