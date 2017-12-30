@@ -3,47 +3,52 @@ $(document).ready(function() {
     // Defaults===========================================
     $("#breakTimerContainer").hide();
 
-    var breakTime = 5;
-    var sessionTime = 25;
-    var seconds = 0;
-    var minutes;
-    var countdownInterval;
+    var breakMinutes = 5;
+    var breakSeconds = 0;
+    var breakInterval;
+    var sessionMinutes = 25;
+    var sessionSeconds = 0;
+    var sessionInterval;
 
-    $("#breakDisplay").html(breakTime);
-    $("#sessionDisplay").html(sessionTime);
-    $("#sessionTimerDisplay").html(sessionTime + ":00");
+    $("#breakDisplay").html(breakMinutes);
+    $("#sessionDisplay").html(sessionMinutes);
+    $("#sessionTimerDisplay").html(sessionMinutes + ":" + (sessionSeconds < 10 ? "0" + sessionSeconds : sessionSeconds));
     //=====================================================
 
     // Add/Subtract Controls===============================
     $("#breakSubtract").click(function() {
-        if (breakTime !== 1) {
-            breakTime--;
-            $("#breakDisplay").html(breakTime);
-            $("#breakTimerDisplay").html(breakTime + ":00");
+        if (breakMinutes !== 1) {
+            breakMinutes--;
+            breakSeconds = 0;
+            $("#breakDisplay").html(breakMinutes);
+            $("#breakTimerDisplay").html(breakMinutes + ":00");
         }
     });
 
     $("#breakAdd").click(function() {
-        if (breakTime !== 15) {
-            breakTime++;
-            $("#breakDisplay").html(breakTime);
-            $("#breakTimerDisplay").html(breakTime + ":00");
+        if (breakMinutes !== 15) {
+            breakMinutes++;
+            breakSeconds = 0;
+            $("#breakDisplay").html(breakMinutes);
+            $("#breakTimerDisplay").html(breakMinutes + ":00");
         }
     });
 
     $("#sessionSubtract").click(function() {
-        if (sessionTime !== 15) {
-            sessionTime--;
-            $("#sessionDisplay").html(sessionTime);
-            $("#sessionTimerDisplay").html(sessionTime + ":00");
+        if (sessionMinutes !== 15) {
+            sessionMinutes--;
+            sessionSeconds = 0;
+            $("#sessionDisplay").html(sessionMinutes);
+            $("#sessionTimerDisplay").html(sessionMinutes + ":00");
         }
     });
 
     $("#sessionAdd").click(function() {
-        if (sessionTime !== 60) {
-            sessionTime++;
-            $("#sessionDisplay").html(sessionTime);
-            $("#sessionTimerDisplay").html(sessionTime + ":00");
+        if (sessionMinutes !== 60) {
+            sessionMinutes++;
+            sessionSeconds = 0;
+            $("#sessionDisplay").html(sessionMinutes);
+            $("#sessionTimerDisplay").html(sessionMinutes + ":00");
         }
     });
     //======================================================
@@ -61,50 +66,66 @@ $(document).ready(function() {
     //======================================================
 
     //Timer countdown=======================================
+
     $("#sessionTimerStartButton").click(function() {
-        countdown();
+        sessionInterval = setInterval(function() {
+            var sessionTime = sessionCountDown(sessionMinutes, sessionSeconds);
+            $("#sessionTimerDisplay").html(sessionTime);
+        }, 1000);
     });
 
     $("#sessionTimerStopButton").click(function() {
-        clearInterval(countdownInterval);
-        sessionTime = minutes;
+        clearInterval(sessionInterval);
     });
 
     $("#breakTimerStartButton").click(function() {
-        countdown();
+        breakInterval = setInterval(function() {
+            var breakTime = breakCountDown(breakMinutes, breakSeconds);
+            $("#breakTimerDisplay").html(breakTime);
+        }, 1000);
     });
 
     $("#breakTimerStopButton").click(function() {
-        clearInterval(countdownInterval);
-        breakTime = minutes;
+        clearInterval(breakInterval);
     });
 
-    function countdown() {
 
-        var sessionVisible = $("#sessionTimerContainer").is(":visible");
-        minutes = sessionVisible ? sessionTime : breakTime;
+    function sessionCountDown(minutes, seconds) {
 
-        countdownInterval = setInterval(function() {
+        if (seconds === 0 && minutes > 0) {
+            seconds = 60;
+            minutes--;
+        }
 
-            if (seconds === 0 && minutes === 0) {
-                clearInterval(countdownInterval);
-                sessionVisible ? $("#sessionTimerDisplay").html("END") : $("#breakTimerDisplay").html("END");
-                return;
-            }
+        if (seconds === 0 && minutes === 0) {
+            return "END";
+        }
 
-            if (seconds === 0 && minutes !== 0) {
-                seconds = 60;
-                minutes--;
-            }
+        seconds--;
 
-            if (seconds === 0 && minutes === 1) {
-                minutes = 0;
-            }
+        sessionMinutes = minutes;
+        sessionSeconds = seconds;
 
-            seconds--;
-            sessionVisible ? $("#sessionTimerDisplay").html(minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)) : $("#breakTimerDisplay").html(minutes + ":" + (seconds < 10 ? "0" + seconds : seconds));
+        return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+    }
 
-        }, 1000);
+    function breakCountDown(minutes, seconds) {
+
+        if (seconds === 0 && minutes > 0) {
+            seconds = 60;
+            minutes--;
+        }
+
+        if (seconds === 0 && minutes === 0) {
+            return "END";
+        }
+
+        seconds--;
+
+        breakMinutes = minutes;
+        breakSeconds = seconds;
+
+        return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
     }
 
 });
