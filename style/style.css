@@ -53,6 +53,29 @@ body {
     margin-right: 1em;
 }
 
+#tomatoTimer {
+    background-image: url("https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Vegetables-PNG/Tomato_Transparent_PNG_Clip_Art_Image.png?m=1471056901");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: auto;
+    height: 15vh;
+    width: 13vw;
+}
+
+.spin {
+    animation: spin 1.0s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
 .origin {
     position:absolute;
     bottom:10px;
